@@ -258,12 +258,15 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new task with a description |
 `* * *` | user | add a deadline to a task I am creating or to a entered task |
+`* * *` | user | add a priority rank to a task I am creating or to a entered task |
+`* * *` | user | add a location to a task I am creating or to a entered task |
+`* * *` | user | add tags to a task I am creating or to a entered task |
 `* * *` | user | delete a task | remove entries that I no longer need
 `* * *` | user | find a task by name | see whether it has been completed or if it is upcoming
+`* * *` | user | find a task by tag | see whether it has been completed or if it is upcoming
 `* * *` | user | I can edit a task | so that I can easily update my task list when changes arise.
-`*`     | 
-
-
+`* * *` | user | view all tasks entered |
+`* * *` | user | clear all tasks | if I deem them unnecessary
 
 ## Appendix B : Use Cases
 
