@@ -261,6 +261,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a priority rank to a task I am creating or to a entered task |
 `* * *` | user | add a location to a task I am creating or to a entered task |
 `* * *` | user | add tags to a task I am creating or to a entered task |
+`* * *` | user | select a task | to view it more detail (user specified choice of google widget: calendar for date, maps for location)
 `* * *` | user | delete a task | remove entries that I no longer need
 `* * *` | user | find a task by name | see whether it has been completed or if it is upcoming
 `* * *` | user | find a task by tag | see whether it has been completed or if it is upcoming
