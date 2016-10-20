@@ -21,14 +21,18 @@ public class Priority {
      * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        assert priority != null;
-        priority = priority.trim();
-        if (!isValidPriority(priority)){
-        	//TODO: Find a way to print message to UI that priority has been autoset
-        	this.value = PRIORITY_LOW.toString();
-        }else{
-        	this.value = priority;
-        }
+        //assert priority != null;
+    	if(priority!=null){
+	        priority = priority.trim();
+	        if (!isValidPriority(priority)){
+	        	//TODO: Find a way to print message to UI that priority has been autoset
+	        	this.value = returnDefaultPriority();
+	        }else{
+	        	this.value = priority;
+	        }
+    	}else{
+    		this.value = returnDefaultPriority();
+    	}
     }
 
     /**
@@ -38,8 +42,19 @@ public class Priority {
         return test.matches(PRIORITY_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the entered priority is within the defined range.
+     * From PRIORITY_LOW to PRIORITY_HIGH inclusive.
+     */
     public static boolean isPriorityInRange(Integer test) {
     	return (test >= PRIORITY_LOW && test <= PRIORITY_HIGH);
+    }
+
+    /**
+     * Returns a String of the default priority to set to if the entered priority is invalid.
+     */
+    public static String returnDefaultPriority(){
+    	return PRIORITY_LOW.toString();
     }
 
     @Override

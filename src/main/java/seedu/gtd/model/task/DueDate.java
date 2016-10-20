@@ -22,12 +22,16 @@ public class DueDate {
     public DueDate(String duedate) throws IllegalValueException {
         //remove assertion! we want floating tasks
     	//assert duedate != null;
-        duedate = duedate.trim();
-        if (!isValidDueDate(duedate)) {
-            //throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
-        	//TODO: Find a way to print message to UI when value is autoset to null
-        	this.value = null;
-        }else{
+    	if(duedate != null){
+    		duedate = duedate.trim();
+	        if (!isValidDueDate(duedate)) {
+	            //throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+	        	//TODO: Find a way to print message to UI when value is autoset to null
+	        	this.value = null;
+	        }else{
+	        	this.value = duedate;
+	        }
+    	}else{
         	this.value = duedate;
         }
     }

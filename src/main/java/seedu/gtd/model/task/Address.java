@@ -21,13 +21,17 @@ public class Address {
      */
     public Address(String address) throws IllegalValueException {
         //assert address != null;
-        if (!isValidAddress(address)) {
-            //throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
-        	//TODO: Find a way to print message to UI when value is autoset to null
-        	this.value = null;
-        }else{
-        	this.value = address;
-        }
+    	if(address!=null){
+	        if (!isValidAddress(address)) {
+	            //throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+	        	//TODO: Find a way to print message to UI when value is autoset to null
+	        	this.value = null;
+	        }else{
+	        	this.value = address;
+	        }
+    	}else{
+    		this.value = address;
+    	}
     }
 
     /**
