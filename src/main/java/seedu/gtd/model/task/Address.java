@@ -10,7 +10,7 @@ import seedu.gtd.commons.exceptions.IllegalValueException;
 public class Address {
     
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Task addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String ADDRESS_VALIDATION_REGEX = ".*"; //Any value including null
 
     public final String value;
 
@@ -20,11 +20,14 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address) throws IllegalValueException {
-        assert address != null;
+        //assert address != null;
         if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+            //throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        	//TODO: Find a way to print message to UI when value is autoset to null
+        	this.value = null;
+        }else{
+        	this.value = address;
         }
-        this.value = address;
     }
 
     /**
