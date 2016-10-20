@@ -8,9 +8,9 @@ import seedu.gtd.commons.exceptions.IllegalValueException;
  */
 public class DueDate {
 
-    public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Task duedate numbers should only contain numbers";
+    public static final String MESSAGE_DUEDATE_CONSTRAINTS = "Invalid value: Task duedate numbers should only contain numbers";
     //public static final String DUEDATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)"; //dd-mm-yyyy
-    public static final String DUEDATE_VALIDATION_REGEX = "\\d+";
+    public static final String DUEDATE_VALIDATION_REGEX = "(\\d+)|(^$)"; //due date can be null
 
     public final String value;
 
@@ -20,12 +20,20 @@ public class DueDate {
      * @throws IllegalValueException if given due date string is invalid.
      */
     public DueDate(String duedate) throws IllegalValueException {
-        assert duedate != null;
-        duedate = duedate.trim();
-        if (!isValidDueDate(duedate)) {
-            throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+        //remove assertion! we want floating tasks
+    	//assert duedate != null;
+    	if(duedate != null){
+    		duedate = duedate.trim();
+	        if (!isValidDueDate(duedate)) {
+	            //throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+	        	//TODO: Find a way to print message to UI when value is autoset to null
+	        	this.value = null;
+	        }else{
+	        	this.value = duedate;
+	        }
+    	}else{
+        	this.value = duedate;
         }
-        this.value = duedate;
     }
 
     /**
