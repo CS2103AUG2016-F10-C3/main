@@ -8,9 +8,11 @@ import seedu.gtd.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority numbers should only contain numbers";
-    public static final String PRIORITY_VALIDATION_REGEX = "[\\p{Alnum} ]+";
-
+    public static final Integer PRIORITY_LOW = 1;
+    public static final Integer PRIORITY_HIGH = 5;
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Invalid value: Task priority set to " + PRIORITY_LOW;
+    public static final String PRIORITY_VALIDATION_REGEX = "[1-5]{1}";
+    
     public final String value;
 
     /**
@@ -21,10 +23,12 @@ public class Priority {
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
         priority = priority.trim();
-        if (!isValidPriority(priority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        if (!isValidPriority(priority)){
+        	//TODO: Find a way to print message to UI that priority has been autoset
+        	this.value = PRIORITY_LOW.toString();
+        }else{
+        	this.value = priority;
         }
-        this.value = priority;
     }
 
     /**
@@ -32,6 +36,10 @@ public class Priority {
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
+    }
+
+    public static boolean isPriorityInRange(Integer test) {
+    	return (test >= PRIORITY_LOW && test <= PRIORITY_HIGH);
     }
 
     @Override
@@ -50,5 +58,4 @@ public class Priority {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
