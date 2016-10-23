@@ -9,6 +9,7 @@ import seedu.gtd.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
+    StartDate getStartDate();
     DueDate getDueDate();
 	Address getAddress();
 	Priority getPriority();
