@@ -22,7 +22,7 @@ public class StartDate {
     public StartDate(String startdate) throws IllegalValueException {
         assert startdate != null;
         startdate = startdate.trim();
-        if (!isValidDueDate(startdate)) {
+        if (!isValidStartDate(startdate)) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
         this.value = startdate;
