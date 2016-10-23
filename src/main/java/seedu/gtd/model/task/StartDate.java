@@ -8,7 +8,7 @@ import seedu.gtd.commons.exceptions.IllegalValueException;
  */
 public class StartDate {
 
-    public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Task startdate numbers should only contain numbers";
+    public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Task start date numbers should only contain numbers";
     //public static final String STARTDATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)"; //dd-mm-yyyy
     public static final String STARTDATE_VALIDATION_REGEX = "\\d+";
 

@@ -23,8 +23,16 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
+<<<<<<< HEAD
     public Task(Name name, StartDate startDate, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, startDate, dueDate, address, priority, tags);
+=======
+    public Task(Name name, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
+        //dueDate and address can be blank
+    	//name is necessary
+    	//priority will be automatically set and taglist is already handled
+    	assert !CollectionUtil.isAnyNull(name, priority, tags);
+>>>>>>> origin/C3/support/use-model.task
         this.name = name;
         this.startDate = startDate;
         this.dueDate = dueDate;
