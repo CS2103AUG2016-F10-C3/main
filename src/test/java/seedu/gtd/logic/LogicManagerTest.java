@@ -388,13 +388,14 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
+            StartDate privateStartDate = new StartDate("111111");
             DueDate privateDueDate = new DueDate("111111");
             Address address = new Address("111, alpha street");
             Priority privatePriority = new Priority("1");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateDueDate, address, privatePriority, tags);
+            return new Task(name, privateStartDate, privateDueDate, address, privatePriority, tags);
         }
 
         /**
@@ -407,6 +408,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
+                    new StartDate("" + Math.abs(seed)),
                     new DueDate("" + Math.abs(seed)),
                     new Address(seed + ", -address"),
                     new Priority("1 " + seed),
@@ -506,6 +508,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new StartDate("1"),
                     new DueDate("1"),
                     new Address("House of 1"),
                     new Priority("1"),
