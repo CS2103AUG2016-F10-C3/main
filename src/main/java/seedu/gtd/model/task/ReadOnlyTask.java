@@ -27,7 +27,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getDueDate().equals(this.getDueDate()));
+                && other.getStartDate().equals(this.getStartDate()))
+                && other.getDueDate().equals(this.getDueDate())
+				&& other.getPriority().equals(this.getPriority());
     }
 
     /**
@@ -36,13 +38,31 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+		        .append(" StartDate: ")
+		        .append(getStartDate())
                 .append(" DueDate: ")
                 .append(getDueDate())
+                .append(" Priority: ")
+                .append(getPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    
+    /**
+     * Returns a formatted version of this Task's dates
+     * startDate - dueDate
+     */
 
+    default String dateString(){
+        final StringBuffer buffer = new StringBuffer();
+        final String separator = " - ";
+        
+        buffer.append(getStartDate()).append(separator).append(getDueDate());
+
+        return buffer.substring(0);
+    }
+    
     /**
      * Returns a string representation of this Task's tags
      */
