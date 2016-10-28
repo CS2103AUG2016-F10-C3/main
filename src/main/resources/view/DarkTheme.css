@@ -101,6 +101,11 @@
     -fx-text-fill: #010504;
 }
 
+.cell_date_label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #020605;
+}
+
 .cell_small_label {
     -fx-font-size: 11px;
     -fx-text-fill: #010504;

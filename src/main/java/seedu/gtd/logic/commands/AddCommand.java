@@ -16,9 +16,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the GTD. "
-            + "Parameters: NAME d/DUEDATE a/ADDRESS p/PRIORITY  [t/TAG]...\n"
+            + "Parameters: NAME s/STARTDATE d/DUEDATE a/ADDRESS p/PRIORITY  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Do CS2103 Tutorial 4 d/21102016 a/johnd@gmail.com p/3 t/CS2103 t/tutorial";
+            + " Do CS2103 Tutorial 4 s/20102016 d/21102016 a/NIL p/3 t/CS2103 t/tutorial";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String dueDate, String address, String priority, Set<String> tags)
+    public AddCommand(String name, String startDate, String dueDate, String address, String priority, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -38,6 +38,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
+                new StartDate(startDate), 
                 new DueDate(dueDate),
                 new Address(address),
                 new Priority(priority),

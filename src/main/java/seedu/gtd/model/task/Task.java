@@ -13,6 +13,7 @@ import seedu.gtd.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private StartDate startDate;
     private DueDate dueDate;
     private Address address;
     private Priority priority;
@@ -22,9 +23,14 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, dueDate, address, priority, tags);
+    public Task(Name name, StartDate startDate, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
+        //assert !CollectionUtil.isAnyNull(name, startDate, dueDate, address, priority, tags);
+        //dueDate and address can be blank
+    	//name is necessary
+    	//priority will be automatically set and taglist is already handled
+    	assert !CollectionUtil.isAnyNull(name, priority, tags);
         this.name = name;
+        this.startDate = startDate;
         this.dueDate = dueDate;
         this.address = address;
         this.priority = priority;
@@ -35,7 +41,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getTags());
     }
 
     @Override
@@ -46,6 +52,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public DueDate getDueDate() {
         return dueDate;
+    }
+    
+    @Override
+    public StartDate getStartDate() {
+        return startDate;
     }
     
     @Override
