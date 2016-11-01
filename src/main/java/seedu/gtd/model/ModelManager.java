@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
-        previousAddressBook = addressBook;
+        previousAddressBook = new AddressBook(addressBook);
     }
 
     public ModelManager() {
@@ -55,7 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
-        System.out.println("reset data to previous addressbook");
         indicateAddressBookChanged();
     }
 
@@ -70,14 +69,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     private void savePreviousAddressBook() {
-    	previousAddressBook = addressBook;
-    	System.out.println("previous addressbook saved");
+    	previousAddressBook = new AddressBook(addressBook);
     }
     
     @Override
     public void undoAddressBookChange() {
     	resetData(previousAddressBook);
-    	System.out.println("resetted data to previous addressbook");
     }
 
     @Override
