@@ -23,9 +23,9 @@ public class ModelManager extends ComponentManager implements Model {
 	
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
-
+    private AddressBook previousAddressBook;
     /**
      * Initializes a ModelManager with the given AddressBook
      * AddressBook and its variables should not be null
@@ -39,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        previousAddressBook = addressBook;
     }
 
     public ModelManager() {
@@ -48,11 +49,13 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        previousAddressBook = addressBook;
     }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
+        System.out.println("reset data to previous addressbook");
         indicateAddressBookChanged();
     }
 
@@ -65,15 +68,28 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(addressBook));
     }
+    
+    private void savePreviousAddressBook() {
+    	previousAddressBook = addressBook;
+    	System.out.println("previous addressbook saved");
+    }
+    
+    @Override
+    public void undoAddressBookChange() {
+    	resetData(previousAddressBook);
+    	System.out.println("resetted data to previous addressbook");
+    }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    	savePreviousAddressBook();
         addressBook.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    	savePreviousAddressBook();
         addressBook.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -82,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0146130W
     @Override
     public synchronized void editTask(int targetIndex, Task task) throws TaskNotFoundException {
+    	savePreviousAddressBook();
         addressBook.editTask(targetIndex, task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
