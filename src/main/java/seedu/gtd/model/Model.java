@@ -47,4 +47,6 @@ public interface Model {
 	
 	/** Updates the filter of the filtered task list to filter by the right parameter*/
 	void updateFilteredTaskList(String keywords, String cmd);
+	/** Returns only the tasks that are yet to be done */
+	UnmodifiableObservableList<ReadOnlyTask> getStartTaskList();
 }

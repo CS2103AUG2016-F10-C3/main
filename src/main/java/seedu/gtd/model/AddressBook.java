@@ -131,7 +131,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
     
     public void doneTask(int index, Task target) throws TaskNotFoundException {
-		System.out.println("in addressbook");
+		System.out.println("in addressbook index: " + index);
 		tasks.done(index, target);
 	}
 

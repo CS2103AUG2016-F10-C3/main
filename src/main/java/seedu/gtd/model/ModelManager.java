@@ -107,6 +107,12 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getStartTaskList() {
+    	updateFilteredListToShowAll(new PredicateExpression(new RemoveDoneQualifier()));
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
 
     @Override
     public void updateFilteredListToShowAll() {
@@ -188,7 +194,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
         	return keywordSet.stream()
-            .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+            .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword) && !task.getisDone())
             .findAny()
             .isPresent();
         }

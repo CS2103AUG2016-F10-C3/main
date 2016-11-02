@@ -34,6 +34,7 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isDone = isDone;
+        System.out.println("added task with isDone = " + isDone);
     }
     
     public Task(Name name, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
@@ -50,7 +51,8 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getTags());
+        this(source.getName(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getTags(), source.getisDone());
+    	System.out.println("read only task add : " + source.getisDone());
     }
 
     @Override

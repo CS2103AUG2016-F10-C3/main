@@ -36,6 +36,8 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return model.getFilteredTaskList();
+        //return model.getFilteredTaskList();
+    	System.out.println("go to main loop");
+    	return model.getStartTaskList();
     }
 }
