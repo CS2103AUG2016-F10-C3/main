@@ -19,6 +19,7 @@ public class Task implements ReadOnlyTask {
     private Address address;
     private Priority priority;
     private boolean isDone;
+    private boolean isRecur;
 
     private UniqueTagList tags;
 
@@ -36,6 +37,18 @@ public class Task implements ReadOnlyTask {
         this.isDone = isDone;
     }
     
+    public Task(Name name, DueDate startDate, DueDate dueDate, Address address, Priority priority, boolean isRecur, UniqueTagList tags, boolean isDone) {
+        assert !CollectionUtil.isAnyNull(name, dueDate, address, priority, tags);
+        this.name = name;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.address = address;
+        this.priority = priority;
+        this.isRecur = isRecur;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isDone = isDone;
+    }
+    
     public Task(Name name, DueDate startDate, DueDate dueDate, Address address, Priority priority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, dueDate, address, priority, tags);
         this.name = name;
@@ -46,12 +59,24 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isDone = false;
     }
+    
+    public Task(Name name, DueDate startDate, DueDate dueDate, Address address, Priority priority, boolean isRecur, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, dueDate, address, priority, tags);
+        this.name = name;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.address = address;
+        this.priority = priority;
+        this.isRecur = isRecur;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isDone = false;
+    }
 
     /**
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getTags(), source.getisDone());
+        this(source.getName(), source.getStartDate(), source.getDueDate(), source.getAddress(), source.getPriority(), source.getisRecur(), source.getTags(), source.getisDone());
     }
 
     @Override
@@ -83,6 +108,11 @@ public class Task implements ReadOnlyTask {
     public boolean getisDone() {
         return isDone;
     }
+    
+    @Override
+    public boolean getisRecur() {
+        return isRecur;
+    }
 
     @Override
     public UniqueTagList getTags() {
@@ -111,6 +141,10 @@ public class Task implements ReadOnlyTask {
     
     public void setisDone(boolean isdone) {
         this.isDone = isdone;
+    }
+    
+    public void setisRecur(boolean isrecur) {
+        this.isRecur= isrecur;
     }
     
     public void edit(String detailType, String newDetail) throws IllegalValueException {

@@ -46,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         previousAddressBook = new Stack<AddressBook>();
         previousAddressBook.push(new AddressBook(addressBook));
+        (new Thread(new Scheduler(addressBook))).start();
     }
 
     public ModelManager() {

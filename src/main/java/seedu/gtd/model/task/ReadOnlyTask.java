@@ -14,6 +14,7 @@ public interface ReadOnlyTask {
 	Address getAddress();
 	Priority getPriority();
 	boolean getisDone();
+	boolean getisRecur();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

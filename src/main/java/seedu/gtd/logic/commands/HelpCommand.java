@@ -7,6 +7,7 @@ import seedu.gtd.commons.events.ui.ShowHelpRequestEvent;
 /**
  * Format full help instructions for every command for display.
  */
+//@@author A0139158X
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
@@ -48,6 +49,15 @@ public class HelpCommand extends Command {
 
         case ExitCommand.COMMAND_WORD:
         	return new CommandResult(ExitCommand.MESSAGE_USAGE);
+        	
+        case EditCommand.COMMAND_WORD:
+        	return new CommandResult(EditCommand.MESSAGE_USAGE);
+        	
+        case DoneCommand.COMMAND_WORD:
+        	return new CommandResult(DoneCommand.MESSAGE_USAGE);
+        	
+        case UndoCommand.COMMAND_WORD:
+        	return new CommandResult(UndoCommand.MESSAGE_USAGE);
         	
         case HelpCommand.COMMAND_WORD:
         	EventsCenter.getInstance().post(new ShowHelpRequestEvent());

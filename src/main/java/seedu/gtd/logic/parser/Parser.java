@@ -141,10 +141,20 @@ public class Parser {
         String dueDateToAdd = checkEmptyAndAddDefault(dueDateMatcher, "dueDate", "nil");
         String addressToAdd = checkEmptyAndAddDefault(addressMatcher, "address", "nil");
         String priorityToAdd = checkEmptyAndAddDefault(priorityMatcher, "priority", "1");
+        Boolean recurring = false;
         
         // format date if due date or start date is specified
         if (dueDateMatcher.matches()) {
         	dueDateToAdd = parseDueDate(dueDateToAdd);
+        	//@@author A0139158X
+        	String[] recurDate = dueDateToAdd.split(" ");
+        	if (recurDate[0].equals("Recurring")) {
+        		recurring = true;
+        		dueDateToAdd = recurDate[1];
+        	}
+        	else {
+        		dueDateToAdd = recurDate[0];
+        	}
         }
         if (startDateMatcher.matches()) {
         	startDateToAdd = parseDueDate(startDateToAdd);
@@ -168,6 +178,7 @@ public class Parser {
                     dueDateToAdd,
                     addressToAdd,
                     priorityToAdd,
+                    recurring,
                     tagsProcessed
             );
         } catch (IllegalValueException ive) {
@@ -483,6 +494,7 @@ private Command prepareList(String args) {
      * @param args full command args string
      * @return the prepared command
      */
+	//@@author A0139158X
     private Command prepareHelp(String args) {
     	//if no argument
     	if (args.equals("")) {

@@ -26,7 +26,25 @@ public class DateNaturalLanguageProcessor implements NaturalLanguageProcessor {
 		} catch (NaturalLanguageException e) {
 			return "";
 		}
-		return formatDateToString(parsedDate);
+		if (dateGroups.get(0).isRecurring()) {
+			return "Recurring " + formatDateToString(parsedDate);
+		}
+		else {
+			return formatDateToString(parsedDate);
+		}
+	}
+	
+	//@@author A0139158X
+	@Override
+	public Date formatDate(String naturalLanguageDate) {
+		List<DateGroup> dateGroups = parser.parse(naturalLanguageDate);
+		Date parsedDate;
+		try {
+			parsedDate = refineDateGroupList(dateGroups);
+		} catch (NaturalLanguageException e) {
+			return null;
+		}
+		return parsedDate;
 	}
 	
 	/** 
