@@ -15,6 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private UniqueTagList tags;
     private boolean isDone;
+    private boolean isRecur;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -26,6 +27,7 @@ public class TestTask implements ReadOnlyTask {
         this.dueDate = dueDate;
         this.address = address;
         this.priority = priority;
+        this.isRecur = false;
         this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
 	}
@@ -68,6 +70,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public boolean getisDone() {
         return isDone;
+    }
+    
+    @Override
+    public boolean getisRecur() {
+        return isRecur;
     }
 
     @Override
