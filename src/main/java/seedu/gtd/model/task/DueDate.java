@@ -1,7 +1,5 @@
 package seedu.gtd.model.task;
 
-import java.util.Date;
-
 import seedu.gtd.commons.exceptions.IllegalValueException;
 
 /**
