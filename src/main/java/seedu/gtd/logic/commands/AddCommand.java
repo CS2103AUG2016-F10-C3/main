@@ -1,12 +1,9 @@
 package seedu.gtd.logic.commands;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.gtd.commons.exceptions.IllegalValueException;
-import seedu.gtd.logic.parser.DateNaturalLanguageProcessor;
-import seedu.gtd.logic.parser.NaturalLanguageProcessor;
 import seedu.gtd.model.task.*;
 import seedu.gtd.model.tag.Tag;
 import seedu.gtd.model.tag.UniqueTagList;
