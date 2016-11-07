@@ -150,10 +150,10 @@ public class Parser {
         	String[] recurDate = dueDateToAdd.split(" ");
         	if (recurDate[0].equals("Recurring")) {
         		recurring = true;
-        		dueDateToAdd = recurDate[1] + " " + recurDate[2];
+        		dueDateToAdd = recurDate[1];
         	}
         	else {
-        		dueDateToAdd = recurDate[0] + " " + recurDate[1];
+        		dueDateToAdd = recurDate[0];
         	}
         }
         if (startDateMatcher.matches()) {
