@@ -1,7 +1,6 @@
 package seedu.gtd.logic.parser;
 
 import static seedu.gtd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.gtd.commons.core.Messages.START_END_DATE_INVALID_COMMAND_FORMAT;
 import static seedu.gtd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.*;
@@ -110,13 +109,8 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
         	return prepareHelp(arguments);
         	
-
         case UndoCommand.COMMAND_WORD:
         	return new UndoCommand();
-
-        case SetFilePathCommand.COMMAND_WORD:
-        	return prepareSetFilePath(arguments);
-
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -141,34 +135,29 @@ public class Parser {
         final Matcher addressMatcher = ADDRESS_TASK_DATA_ARGS_FORMAT.matcher(preprocessedArg);
         final Matcher priorityMatcher = PRIORITY_TASK_DATA_ARGS_FORMAT.matcher(preprocessedArg);
         final Matcher tagsMatcher = TAGS_TASK_DATA_ARGS_FORMAT.matcher(preprocessedArg);
- 
+        
         String nameToAdd = checkEmptyAndAddDefault(nameMatcher, "name", "nil");
         String startDateToAdd = checkEmptyAndAddDefault(startDateMatcher, "startDate", "nil");
         String dueDateToAdd = checkEmptyAndAddDefault(dueDateMatcher, "dueDate", "nil");
         String addressToAdd = checkEmptyAndAddDefault(addressMatcher, "address", "nil");
         String priorityToAdd = checkEmptyAndAddDefault(priorityMatcher, "priority", "1");
+        Boolean recurring = false;
         
         // format date if due date or start date is specified
-        
-        Date dueDateInDateFormat = null;
-        Date startDateInDateFormat = null;
-        
         if (dueDateMatcher.matches()) {
-        	dueDateInDateFormat = getDateInDateFormat(dueDateToAdd);
         	dueDateToAdd = parseDueDate(dueDateToAdd);
-        	System.out.println(dueDateInDateFormat);
+        	//@@author A0139158X
+        	String[] recurDate = dueDateToAdd.split(" ");
+        	if (recurDate[0].equals("Recurring")) {
+        		recurring = true;
+        		dueDateToAdd = recurDate[1] + " " + recurDate[2];
+        	}
+        	else {
+        		dueDateToAdd = recurDate[0] + " " + recurDate[1];
+        	}
         }
-        
         if (startDateMatcher.matches()) {
-        	startDateInDateFormat = getDateInDateFormat(startDateToAdd);
         	startDateToAdd = parseDueDate(startDateToAdd);
-        }
-        
-        // check that end date is strictly later than start date
-        
-        if (dueDateInDateFormat != null && startDateInDateFormat != null 
-        		&& dueDateInDateFormat.compareTo(startDateInDateFormat) < 0) {
-        	return new IncorrectCommand(START_END_DATE_INVALID_COMMAND_FORMAT);
         }
         
         Set<String> tagsProcessed = Collections.emptySet();
@@ -176,7 +165,6 @@ public class Parser {
         if (tagsMatcher.matches()) {
         	tagsProcessed = getTagsFromArgs(tagsMatcher.group("tagArguments"));
         }
-        
         
         // Validate arg string format
         if (!nameMatcher.matches()) {
@@ -190,14 +178,15 @@ public class Parser {
                     dueDateToAdd,
                     addressToAdd,
                     priorityToAdd,
+                    recurring,
                     tagsProcessed
             );
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
-	private String appendEnd(String args) {
+    
+    private String appendEnd(String args) {
     	return args + " z/";
     }
     
@@ -218,11 +207,6 @@ public class Parser {
     
     //@@author A0130677A
     
-    private Date getDateInDateFormat(String dueDateRaw) {
-    	NaturalLanguageProcessor nlp = new DateNaturalLanguageProcessor();
-    	return nlp.getDate(dueDateRaw);
-    }
-    
     // remove time on date parsed to improve search results
     private String removeTimeOnDate(String dueDateRaw) {
     	String[] dateTime = dueDateRaw.split(" ");
@@ -239,7 +223,6 @@ public class Parser {
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
         }
-        
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.split(" "));
         return new HashSet<>(tagStrings);
@@ -254,12 +237,13 @@ public class Parser {
      */
     private Command prepareEdit(String args) {
         
-        Optional<Integer> index = parseIndex(args, EDIT_DATA_ARGS_FORMAT);
         final Matcher matcher = EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         
+        Optional<Integer> index = Optional.of(Integer.parseInt(matcher.group("targetIndex")));
         final String[] splitNewDetails = matcher.group("newDetails").split("\\s+");
         ArrayList<String> combinedDetails = combineSameDetails(splitNewDetails);
         
@@ -399,8 +383,6 @@ public class Parser {
 
         return new DoneCommand(index.get());
     }
-    
-  //@@author addressbook-level4
 
     /**
      * Parses arguments in the context of the select task command.
@@ -435,23 +417,7 @@ public class Parser {
         return Optional.of(Integer.parseInt(index));
 
     }
-    
-    //@@author A0146130W
-    private Optional<Integer> parseIndex(String command, Pattern matcherFormat) {
-        final Matcher matcher = matcherFormat.matcher(command.trim());
-        if (!matcher.matches()) {
-            return Optional.empty();
-        }
 
-        String index = matcher.group("targetIndex");
-        if(!StringUtil.isUnsignedInteger(index)){
-            return Optional.empty();
-        }
-        return Optional.of(Integer.parseInt(index));
-
-    }
-    
-    //@@author addressbook-level4
     /**
      * Parses arguments in the context of the find task command.
      *
@@ -528,6 +494,7 @@ private Command prepareList(String args) {
      * @param args full command args string
      * @return the prepared command
      */
+	//@@author A0139158X
     private Command prepareHelp(String args) {
     	//if no argument
     	if (args.equals("")) {
@@ -542,24 +509,4 @@ private Command prepareList(String args) {
         final String commandWord = matcher.group("commandWord");
         return new HelpCommand(commandWord);
     }
-    
-    //@@author A0139072H
-    /**
-     * Parses arguments in the context of the setFilePath command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-	private Command prepareSetFilePath(String args) {
-		if(args.equals("")){
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetFilePathCommand.MESSAGE_USAGE));
-		}
-		final String filePath = args;
-		try {
-			return new SetFilePathCommand(filePath);
-		} catch (IllegalValueException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetFilePathCommand.MESSAGE_USAGE));
-		}
-	}
-
 }

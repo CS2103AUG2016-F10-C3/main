@@ -25,41 +25,28 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Tan Shao Yun](http://github.com/shaocloud)
 <img src="images/ShaoYun.jpg" width="150"><br>
 Role: Developer <br>  
-* Components in charge of: [UI, Design](https://github.com/CS2103AUG2016-F10-C3/main/blob/master/docs/DeveloperGuide.md#design)
-* Features implemented:	
-	* [Reordered UI](https://github.com/CS2103AUG2016-F10-C3/main/tree/C3/UI/Compatibi/src/main/resources/view)
-	* [UML Design](TBA)
-* Other major contributions:
-	* [Designed Screenshots](https://github.com/CS2103AUG2016-F10-C3/main/blob/master/docs/images/Ui.jpg)
-	* [Designed icon](https://github.com/CS2103AUG2016-F10-C3/main/blob/C3/UI/Compatibi/src/main/resources/images/tary.png)
+Responsibilities: UI
 
 -----
 
 #### [Voon Soo Yin](http://github.com/tessav) 
 <img src="images/SooYin.jpg" width="150"><br>
+ Role: Developer <br>  
+ Responsibilities: Logic
  
-* Components in charge of: [Logic](https://github.com/se-edu/addressbook-level4/blob/master/docs/DeveloperGuide.md#logic-component)
-* Aspects/tools in charge of: Documentation, Travis
-* Features implemented:
-   * [Add task with flexibility in command format]()
-   * [Add floating task and event task]()
-   * [Find task by each field type]()
-   * [Mark task as done]()
-   * [Separate listing of tasks that are done/not done]()
-* Code written: [[functional code](A0130677A.md)][[test code](A0130677A.md)][[docs](A0130677A.md)]
-* Other major contributions:
-  * Command format validation & regex
-  * Set up Travis
-  * Complete user guide
- 
-------
+ -----
 
-# Acknowledgements
+#### [Nyan Lin Cho](http://github.com/NachosNLC) 
+<img src="images/Nachos.jpg" width="150"><br>
+
+* Components in charge of: [Storage and Testing](https://github.com/se-edu/addressbook-level4/blob/master/docs/DeveloperGuide.md#model-component)
+ 
+ -----
+
+# Acknoledgements
 
 #### [Chan Jun Wei](http://github.com/chanjunweimy) 
 <img src="images/ChanJunWei.jpg" width="150"><br>
  Role: Module Tutor and Project Supervisor <br>  
 
- -----
- 
 Code modified from : https://github.com/nus-cs2103-AY1617S1/addressbook-level4

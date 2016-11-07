@@ -10,7 +10,7 @@ public interface NaturalLanguageProcessor {
 	
 	/** Takes in a string written in natural language and formats it.*/
 	String formatString(String s);
-	Date getDate(String dueDateRaw);
+	Date getDate(String d);
 	
 	public static class NaturalLanguageException extends DataConversionException {
         protected NaturalLanguageException() {
