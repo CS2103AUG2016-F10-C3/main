@@ -23,8 +23,8 @@ public class RecurringTaskChecker implements Runnable{
 	@SuppressWarnings("deprecation")
 	public void run() {
 		for(Task t: addressbook.getUniqueTaskList()) {
-			if (t.getisRecur() && !adate.equals(nlp.formatDate(t.getDueDate().toString())) 
-			&& adate.getDay()==nlp.formatDate(t.getDueDate().toString()).getDay()) {
+			if (t.getisRecur() && !adate.equals(nlp.getDate(t.getDueDate().toString())) 
+			&& adate.getDay()==nlp.getDate(t.getDueDate().toString()).getDay()) {
 				t.setisDone(false);
 			}
 			
