@@ -2,7 +2,11 @@
 
 ## Load Sample Data
 1. Download the zip file [F10-C3][Tary].zip
-2. Extract the file
+2. Extract all contents of the zip file into the same folder, if done right, the following should be in the same folder:
+  * Config.json
+  * Preferences.json
+  * [F10-C3][Tary].jar
+  * folder named 'data' with only 1 file, 'sampleData.xml'
 3. Launch [F10-C3][Tary].jar 
 
 
@@ -12,7 +16,7 @@
   > adds floating task with name: buy coffee, priority set as default (1) and all other fields: nil.
 * Add an event task: `add nus hackathon s/saturday d/sunday`<br>
   > adds task with name: nus hackathon, start date is next Saturday of the testing, and end date is next Sunday of testing.<br>
-  > both are in the format: dd/mm/yyyy hh:mmm 
+  > both are in the format: dd/mm/yyyy hh:mm
 * Add a deadline task: `add CS2103 tutorial d/tomorrow`<br>
   > start date not specified but end date (which is deadline) is.
 * Add a full task: `add write letter a/NUS s/today d/tomorrow p/5 t/formal`<br>
