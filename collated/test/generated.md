@@ -1,5 +1,5 @@
 # generated
-###### /java/seedu/gtd/logic/LogicManagerTest.java
+###### /seedu/gtd/logic/LogicManagerTest.java
 ``` java
 
 
@@ -157,7 +157,7 @@
     }
     
 ```
-###### /java/seedu/gtd/logic/LogicManagerTest.java
+###### /seedu/gtd/logic/LogicManagerTest.java
 ``` java
     
     class TestFindHelper{
@@ -170,7 +170,7 @@
     }
 
 ```
-###### /java/seedu/gtd/logic/LogicManagerTest.java
+###### /seedu/gtd/logic/LogicManagerTest.java
 ``` java
         /**
          * Generates an AddressBook with auto-generated tasks.
